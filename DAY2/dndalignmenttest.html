@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>DnD九大陣營測試</title>
+</head>
+<style>
+    body {
+        background-color: #ABA6BF;
+    }
+    
+    button {
+        background-color: #595775;
+        font-family: Microsoft JhengHei;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        display: inline-block;
+        font-size: 16px;
+        left: 50%;
+        width: 400px;
+        z-index: 5;
+    }
+    
+    #homepage {
+        background-color: #595775;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 6;
+    }
+    
+    #title {
+        font-family: Microsoft JhengHei;
+        font-size: 50px;
+        color: white;
+        top: 30px;
+        z-index: 10;
+    }
+    
+    #start {
+        background-color: white;
+        font-family: Microsoft JhengHei;
+        padding: 5px;
+        font-size: 30px;
+        color: #595775;
+        position: absolute;
+        top: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        width: 150px;
+    }
+    
+    #resulttitle {
+        font-family: Microsoft JhengHei;
+        font-size: 30px;
+        border: none;
+        color: white;
+        position: relative;
+        top: 30px;
+    }
+    
+    #result {
+        font-family: Microsoft JhengHei;
+        font-size: 24px;
+        border: none;
+        color: white;
+        position: relative;
+        top: 50px;
+        width: 600px;
+    }
+    
+    #form {
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-50%);
+        height: 155px;
+        width: 400px;
+    }
+    
+    #question {
+        background-color: #595775;
+        font-family: Microsoft JhengHei;
+        border: none;
+        color: white;
+        font-size: 22px;
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 35%;
+        width: 100%;
+    }
+    
+    @media (max-width:600px) {
+        #result {
+            width: 100%;
+        }
+    }
+    
+    @media (max-width:400px) {
+        #form {
+            width: 100%;
+        }
+        button {
+            width: 100%;
+        }
+    }
+</style>
+
+<body>
+    <center>
+        <div id="homepage">
+            <br/><br/><br/><br/>
+            <div id="title">DnD九大陣營測試</div>
+            <button type="button" id="start" onClick="setUp()">開始測試</button>
+        </div>
+        <h1 id="resulttitle"></h1>
+        <div id="result"></div>
+    </center>
+
+    <p id="form">
+        <button type="button" id="a1" onClick="next(1)" disabled></button><br/><br/>
+        <button type="button" id="a2" onClick="next(2)" disabled></button><br/><br/>
+        <button type="button" id="a3" onClick="next(3)" disabled></button><br/><br/>
+        <button type="button" id="a4" onClick="next(4)" disabled></button><br/><br/>
+    </p>
+    <a id="question"></a><br/>
+</body>
+
+<script language="JavaScript" type="text/javascript">
+    var i = 0,
+        j = 0;
+    var align = "";
+    var lg = 0,
+        ln = 0,
+        le = 0,
+        ng = 0,
+        nn = 0,
+        ne = 0,
+        cg = 0,
+        cn = 0,
+        ce = 0,
+        tie = -1,
+        lx = 0,
+        nx = 0,
+        cx = 0,
+        xg = 0,
+        xn = 0,
+        xe = 0;
+    var number = 0;
+    var quiz = JSON.parse('[ { "question": "1. 長輩在家族中公開反對你，你會：", "a1": "接受批評，改變方法", "a2": "嘗試與長輩妥協，用折衷的方法", "a3": "忽略長輩的輕蔑，誹謗他們", "a4": "千方百計使他們收聲" }, { "question": "2. 你會放棄一個前途無量的職業幫助家庭渡過時艱嗎？", "a1": "不用想，肯定會", "a2": "會，但有點不情願", "a3": "除非我肯定我會很快重回工作崗位", "a4": "不會" }, { "question": "3. 你會為了前途而背叛家人嗎？", "a1": "會，不帶一點罪惡感", "a2": "會——只要我能秘密行事", "a3": "我會抗拒這誘惑", "a4": "我認為這個主意極為可恨" }, { "question": "4. 你尊敬一家之主嗎？", "a1": "他們的言語指導我的行動", "a2": "他們是我的榜樣", "a3": "通常他們都與我無關", "a4": "我當他們透明" }, { "question": "5. 如果家族要你與一個令人作嘔的傢伙結婚，你會：", "a1": "聽從安排，為能幫助家族而自豪", "a2": "會，但強顏歡笑", "a3": "巧妙地抗婚", "a4": "逃跑" }, { "question": "6. 有一位家人疏遠了你。在他彌留之際，他想與你和解。你會：", "a1": "與他談談，但堅守立場", "a2": "不跟他說話", "a3": "不計前嫌敞開心扉地討論前事", "a4": "積極進行和解，並留心聽他的遺言" }, { "question": "7. 一個位高權重的腐敗法官允諾如果你能作對你朋友不利的假證，他便給你一大筆錢。你會 ：", "a1": "照做，然後拿錢", "a2": "拿錢照做，但儘量使證詞顯得無力", "a3": "拒絕", "a4": "不管結果如何，都為朋友作證" }, { "question": "8. 你會親近朋友，還是與大部分人保持一段距離以保安全？", "a1": "我有一大群密友", "a2": "我有些密友", "a3": "我有少數密友", "a4": "我會與人保持距離" }, { "question": "9. 你背叛過朋友嗎？", "a1": "我幹過不止一次，有時也能逃避懲罰", "a2": "我只幹過那麼一次", "a3": "我曾被慫恿過這麼做，但從未做過", "a4": "我從未考慮過這種事" }, { "question": "10. 你怎麼看待“執子之手，與子偕老”這類對愛人的終生承諾？", "a1": "我正渴望著這麼一段羅曼史", "a2": "這種羅曼史挺理想的——如果能成功的話", "a3": "我擔心我會錯過其他人對我的愛", "a4": "作繭自縛？真是天大的錯誤" }, { "question": "11. 朋友向你借錢，你會要他們還嗎？", "a1": "會，而且寫好借據，不得抵賴", "a2": "會，但期限上會寬鬆些", "a3": "不會，儘管還了會更好", "a4": "不會，他們欠我一個人情" }, { "question": "12. 你仍與兒時玩伴保持聯絡嗎？", "a1": "是的，我們定期通信", "a2": "是的，我們努力保持聯絡", "a3": "不會，我經常搬家", "a4": "不會，我不再與他們有共同之處" }, { "question": "13. 你會花時間和金錢在團隊上嗎？", "a1": "會，我會優先考慮團隊的需要", "a2": "如果符合我的需要的話，我會盡我所能", "a3": "不會，我沒錢也沒閑", "a4": "不會，花時間和金錢在團隊上是一種浪費" }, { "question": "14. 團隊面臨被侵害的威脅，你會：", "a1": "保衛它直至自己的最後一口氣", "a2": "和殘存同伴構築防禦", "a3": "一看到勢頭不對就逃跑", "a4": "與入侵者達成協定，成為間諜" }, { "question": "15. 如果你受傷了，需要急救，你的同伴願意幫助你嗎？", "a1": "會的，因為他們知道我也會為他們做同樣的事", "a2": "會的，因為我很受歡迎", "a3": "可能不會，因為首領不信任我", "a4": "肯定不會，我在集體中樹敵了" }, { "question": "16. 你尊重團隊的規範和領袖嗎？", "a1": "毋庸置疑，是的", "a2": "是的，總的來說他們是最佳的管理方式", "a3": "當它適合我時，我才會——有些規範我並不認同", "a4": "我不關心他們；他們拿我沒轍" }, { "question": "17. 同伴迴避你，或嘲笑你嗎？", "a1": "是的，這些井底之蛙不會理解規範之外的人", "a2": "有些會，因為我不適合所有人", "a3": "不會，我看起來一切正常", "a4": "不會，我就是團隊中的正常人的標準" }, { "question": "18. 你會競選重要職位，或者希望代表團隊的意志嗎？", "a1": "做這種事是我所樂意接受的榮譽", "a2": "當然。這是每個人的義務", "a3": "不會，除非無人能接手此事", "a4": "不會，我不想為團體利益負責" }, { "question": "19. 你的國家鬧饑荒，你會：", "a1": "與其他人共用自己有的食物", "a2": "自己吃盡可能少，餘下的給其他人", "a3": "偷取自己生存所需食物", "a4": "偷取盡可能多的食物，然後高價賣出" }, { "question": "20. 給你足夠的錢，你會往國王的酒中下毒嗎？", "a1": "會，類似的事我幹過了", "a2": "如果我能逃避懲罰的話，我會的", "a3": "不會，儘管一大筆錢在引誘我", "a4": "不會，而且我會叫國王小心這個陰謀" }, { "question": "21. 瘟疫傳遍你的國家，你會：", "a1": "接下尋求解藥的危險任務", "a2": "盡力治好病人", "a3": "避免接觸到病人", "a4": "逃離國家" }, { "question": "22. 你尊敬國家當局的合法權威嗎？", "a1": "是的，某主席萬歲！", "a2": "是的，我們的統治者大體上是公平、公正的", "a3": "不會，統治者還不是人一個！", "a4": "不會，權力必定導致腐化" }, { "question": "23. 給你一筆穩賺的生意，你會為敵國做間諜嗎？", "a1": "會，因為我的國家勢必任人魚肉", "a2": "會，因為國家機密對我無關緊要", "a3": "不會，我會被抓的", "a4": "不會，我不會辜負國家對我的信任" }, { "question": "24. 你仰賴政府來建立社會契約和保障所有權嗎？", "a1": "是的，因為維護法律比任何個人爭執重要", "a2": "是的，因為法庭就是為了解決這種爭執而設立的", "a3": "你在開玩笑嗎？政府連路都不會鋪", "a4": "絕對不會，如果我自己不能保護個人所有，我就無權擁有它" }, { "question": "25. 如果你入獄了，你會為了脫獄而傷害或殺死其他人嗎？", "a1": "會，服刑這麼多年等於鎖住自己", "a2": "會，他們在接這份差事時便已知道這風險了", "a3": "不會，除非只造成很快癒合的輕傷", "a4": "不會，那些守衛只是在盡本分而已" }, { "question": "26. 你接受貴族有權惡劣對待手下的僕人嗎？", "a1": "是的，很幸運，他們不是奴隸", "a2": "是的，有時要嚇嚇，他們才肯幹活", "a3": "不會，貴族應仁慈地統治", "a4": "任何人都無權惡劣對待別人。我沒什麼可說了。" }, { "question": "27. 你意外地犯罪了，你會：", "a1": "認罪，並向受害者賠償", "a2": "認罪，向法官請求寬大處理", "a3": "隱瞞自己的涉案事實，必要時說謊", "a4": "嫁禍於人" }, { "question": "28. 如果犯罪了，你會認罪嗎？", "a1": "會，因為我有這個責任", "a2": "會，因為我會因此獲得輕判", "a3": "不會，讓檢察官證明我有罪", "a4": "不會，我會證明我“無罪”的" }, { "question": "29. 如果有被懲罰的風險，你會發表一個革新的政見嗎？", "a1": "會，我寧願受罰也不願保持沉默。揭竿而起！", "a2": "會，總要有人說真話", "a3": "不會，儘管私底下我會對朋友說", "a4": "不會，不值得為政治費神" }, { "question": "30. 旅行時，你目擊了一場暴力犯罪。你被傳去作證，這會大幅耽誤你的行程。你會：", "a1": "連夜溜走，避免作證", "a2": "說自己什麼也沒看到", "a3": "勉強留下，作證，然後離開", "a4": "留下直至結案所需證供足夠" }, { "question": "31. 財富的最大用途是什麼？", "a1": "幫助窮人和不幸的人", "a2": "滿足親朋戚友需要", "a3": "成為最有錢的人", "a4": "不僅成為最有錢的人，還要阻止別人超過自己" }, { "question": "32. 遇到乞丐，你會：", "a1": "慷慨地給錢", "a2": "恰到好處地給錢", "a3": "只給我認為無所謂的錢——至多一兩個銅板", "a4": "視而不見" }, { "question": "33. 通過魔法，你可以使村裏的商人們以為你的銅幣是金幣。你會這樣做嗎？", "a1": "會，賺得越多越好", "a2": "會，但只騙富商", "a3": "不會，風險太大了", "a4": "不會，商人也要養家糊口啊" }, { "question": "34. 你有兩份工作機會。一份酬勞更多，另一份較穩定。你會如何選擇？", "a1": "肯定是更賺錢的那份；穩定的工作聽上去像苦差事", "a2": "可能是前者，儘管我會看看後者幹些什麼", "a3": "後者，除非前者賺的錢多到嚇死人", "a4": "肯定是穩定的那份，因為我有長遠的計畫" }, { "question": "35. 最佳的致富途徑是什麼？", "a1": "這關乎天時地利，還有運氣", "a2": "靈活變通會有更多機會", "a3": "按照一個有適度風險的長期計畫來做", "a4": "努力工作，堅持不懈" }, { "question": "36. 如果你接受一件工作，即使它變得很危險，你仍然會努力完成任務嗎？", "a1": "會，我說話算數", "a2": "會，因為人家會認為我信得過，這很好", "a3": "你可以賭我會否爽約", "a4": "如果這不是什麼好差事，那算了吧" } ]');
+    var ans = JSON.parse('[ { "question": 1, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xe += 1;", "a4": "xe += 2;" }, { "question": 2, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 3, "a1": "xe += 2;", "a2": "xe += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 4, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "cx += 1;", "a4": "cx += 2;" }, { "question": 5, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 6, "a1": "cx += 2;", "a2": "cx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 7, "a1": "xe += 2;", "a2": "xe += 1;", "a3": "xg += 1;", "a4": "xg += 2;" }, { "question": 8, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 9, "a1": "xe += 2;", "a2": "xe += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 10, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "cx += 1;", "a4": "cx += 2;" }, { "question": 11, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 12, "a1": "nx += 2;", "a2": "nx += 1;", "a3": "cx += 1;", "a4": "cx += 2;" }, { "question": 13, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 14, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xe += 1;", "a4": "xe += 2;" }, { "question": 15, "a1": "xn += 2;", "a2": "xn += 1;", "a3": "xe += 1;", "a4": "xe += 2;" }, { "question": 16, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "cx += 1;", "a4": "cx += 2;" }, { "question": 17, "a1": "cx += 2;", "a2": "cx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 18, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 19, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xe += 1;", "a4": "xe += 2;" }, { "question": 20, "a1": "xe += 2;", "a2": "xe += 1", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 21, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 22, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "cx += 1;", "a4": "cx += 2;" }, { "question": 23, "a1": "cx += 2;", "a2": "cx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 24, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 25, "a1": "xe += 2;", "a2": "xe += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 26, "a1": "xn += 2;", "a2": "xn += 1;", "a3": "xg += 1;", "a4": "xg += 2;" }, { "question": 27, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xe += 1;", "a4": "xe += 2;" }, { "question": 28, "a1": "lx += 2;", "a2": "lx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 29, "a1": "cx += 2;", "a2": "cx += 1;", "a3": "nx += 1;", "a4": "nx += 2;" }, { "question": 30, "a1": "cx += 2;", "a2": "cx += 1;", "a3": "lx += 1;", "a4": "lx += 2;" }, { "question": 31, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xe += 1;", "a4": "xe += 2;" }, { "question": 32, "a1": "xg += 2;", "a2": "xg += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 33, "a1": "xe += 2;", "a2": "xe += 1;", "a3": "xn += 1;", "a4": "xn += 2;" }, { "question": 34, "a1": "nx += 2;", "a2": "nx += 1;", "a3": "lx += 1;", "a4": "lx += 2;" }, { "question": 35, "a1": "cx += 2;", "a2": "cx += 1;", "a3": "lx += 1;", "a4": "lx += 2;" }, { "question": 36, "a1": "nx += 2;", "a2": "nx += 1;", "a3": "cx += 1;", "a4": "cx += 2;" } ]');
+    var output = JSON.parse('[ { "title": "守序善良（十字軍）", "content": "守序善良的人物會受到眾人的期待，他們必須表現得像個好人，而且嚴守紀律，毫不猶豫地 挺身與邪惡對抗。他們只說實話、信守承諾、幫助需要援助的人，而且面對不義之事必出言 反對。守序善良的人物不願見到未受懲罰的罪行。聖武士愛爾涵卓就是遵行守序善良，她打 擊邪惡從不留情，保護無辜時絕不猶豫。 守序善良的長處是，可以結合榮譽與熱情。" }, { "title": "中立善良（施恩者）", "content": "中立善良的人物願盡已所能地作一個好人該做的事。他們樂意幫助他人，也願意替國王或領 主工作，但卻不認為自己被控制。牧師喬森便是中立善良的典型，他視人們的需要而伸出援 手。 一般人習慣將中立善良稱做（真正的善良）。 中立善良的長處是，行善時不須顧慮命令，也不會偏頗。" }, { "title": "混亂善良（反抗者）：", "content": "混亂善良的人物依循內心的良知做事，不顧慮他從的期待。他照自己的方式做事，但心地善 良仁慈。他相信善良與正義，卻不服從律法與規矩，痛恨別人干涉，或指使他該怎麼做。他 以自身的道德標準行事，雖然本意善良，但可能不見容於社會。遊俠索維裏斯便是混亂善良 的典型，他會襲擊邪惡公爵的稅吏。 混亂善良的長處是，可以結合善良與自由。" }, { "title": "守序中立（審判者）", "content": "守序中立的人物依循法律、傳統或個人信條行事，聽從命令與組織。他們可能有個人信念， 並依循某標準生活，也可能會完全服從於某個強大、有組織的政府。武僧安珀是守序中立的 代表，依循自己的原則行事，不會因為人們的需求或邪惡的誘惑而動搖。 一般人習慣將守序中立稱做（真正的守序）。 選擇守序中立的長處是，不需要成為一個狂熱者，也能博得人們的信賴與尊重。" }, { "title": "絕對中立（無立場者）", "content": "絕對中立的人物總是見風轉舵。他們對善良與邪惡、守序與混亂都沒有特別的傾向。他們大 多缺乏信念，而非信仰中立。他們常認為善良比邪惡要好，畢竟他們也寧願與好人相處或由 好人統治。但他們個人卻不對善良抱持任何信念。法師米雅莉便是中立的代表，她會為自己 的工作奉獻，卻對道德上的爭辨感不勝厭煩。 但有些中立的人物信仰中立的哲學。他們將善良、邪惡、秩序與混亂視為偏頗危險的極端。 他們介導中間路線，認為若要看得遠，中立才是最好、最平衡主張。 一般人習慣將絕對中立稱做（真正的中立）。 選擇絕對中立的長處是，你可以自然地行動，不帶偏見或壓迫。" }, { "title": "混亂中立（自由人）", "content": "混亂中立的人物依循自己的衝動行事，是完全個人主義者。他重視自己的自由，卻不願挺身 保衛別人的自由。他躲避權威、憎恨限制、挑戰傳統。混亂中立者不會像抗議群眾或無政府 主義者那樣，去刻意破壞組織，因為如此做的人必定是由善良（如：想要解放他人）或邪惡 （如：希望讓他人受苦）的力量驅使。*著小聰明在大 陸上流浪的吟游詩人大衛斯，便是混 亂中立的代表。 一般人習慣將混亂中立稱做（真正的混亂）。 雖然混亂中立者難以預料，但其行為並非毫無理性，他不太可能莫名其妙地跳河。 擇混亂中立的長處是，可以不顧社會的限制或道德勸說。" }, { "title": "守序邪惡（支配者）", "content": "守序邪惡的人在理論上會依循自己的標準，盡其所能地取得想要的東西，而不管是否傷害到 他人。他們重視傳統、忠誠與紀律，但不在乎自由與生命的價值。他們依循規則行事，卻不 抱持憐憫或熱情。他們喜歡階級制度，因為可以統治下屬，也聽令於上級。他們不責難他人 的行為，但會責難其種族、信仰、家鄉或社會地位。他 們不願意違背法律或承諾，這一部 分是出於本性，部份則是因為仰賴紀律的保護，以免遭道德立場相械的人反對。有些守序邪 惡的人有某些禁忌，如：不殺生（但卻命令屬下去做）或不傷害小孩（如果他們有用的話） ，他們認為這樣已經比無法無天的惡人更（好）了。為了擴張自己權力而利用人民的公爵， 便是守序邪惡代表。 有些守序邪惡的人（或生物）視邪惡為一種信念，就像信仰善良的十字軍一樣。除了為達自 己的目的而傷害他人，他們也以散播邪惡為樂。他們也可能侍奉邪惡的神祗或主子，將惡行 視為工作的一部分。 有些人將守序邪惡稱做（惡魔崇拜者），因為惡魔是守序邪惡典型生物。 守序邪惡的可怕在於它是有系統、有計劃地行惡，因此經常成功。" }, { "title": "中立邪惡（犯罪者）", "content": "中立邪惡的人為了自己可以做出任何事，一切都是為了自己，就這麼簡單。他們從不為死在 手下的人掉淚，不化是為財、為了高興或只是為了方便。他們不喜歡紀律，也不遵守法律、 傳統或任何高貴的信念。然而，他們也不像混亂邪惡者那樣浮躁不安，或熱愛衝突。為了得 到想要的東西而燒殺擄掠的罪犯，便屬於中立邪惡陣 營。 有些中立邪惡者將邪惡視為一種理想，想要獻身於邪惡。這種惡人大多是邪惡神祗或秘密組 織的成員。 一般人習慣將中立邪惡稱做（真正的邪惡）。 中立邪惡的可怕在於表現出全然的邪惡，完全沒有榮譽感和物件區別。" }, { "title": "混亂邪惡（毀滅者）", "content": "混亂邪惡的人會因為貪婪、憎恨或欲望而做出任何事。他暴躁易怒、滿懷惡意、獨斷暴力而 且無法預料。為了得到想要的東西，他會衝動而莽撞地行動，散播邪惡與混亂。所幸他的計 畫大多複雜無章，其團體大多組織散亂。一般而言，混亂邪惡者只有被強迫時才會與人合作 ，其領袖常要面對門爭與暗殺。為了復仇或毀滅而進行 瘋狂計畫的術士，便是混亂邪惡的 代表。 混亂邪惡有時被形容為（妖魔之人），因為妖魔正是混亂邪惡的典型生物。 混亂邪惡的可怕在於不僅破壞美麗與生命，也破壞了美麗與生命賴以生存的秩序。" } ]');
+    var question = document.getElementById('question'),
+        ans1 = document.getElementById("a1"),
+        ans2 = document.getElementById("a2"),
+        ans3 = document.getElementById("a3"),
+        ans4 = document.getElementById("a4"),
+        result = document.getElementById('result'),
+        resulttitle = document.getElementById('resulttitle');
+    var homepage = document.getElementById('homepage');
+
+    function setUp() {
+        if (document.getElementById('homepage') != null) {
+            homepage.parentNode.removeChild(homepage);
+            ans1.disabled = false;
+            ans2.disabled = false;
+            ans3.disabled = false;
+            ans4.disabled = false;
+        }
+        question.innerHTML = quiz[number]["question"];
+        ans1.innerHTML = quiz[number]["a1"];
+        ans2.innerHTML = quiz[number]["a2"];
+        ans3.innerHTML = quiz[number]["a3"];
+        ans4.innerHTML = quiz[number]["a4"];
+    }
+
+    function next(a) {
+        if (a == 1) {
+            eval(ans[number]["a1"]);
+        } else if (a == 2) {
+            eval(ans[number]["a2"]);
+        } else if (a == 3) {
+            eval(ans[number]["a3"]);
+        } else if (a == 4) {
+            eval(ans[number]["a4"]);
+        }
+        if (number == 35) {
+            question.parentNode.removeChild(question);
+            ans1.parentNode.removeChild(ans1);
+            ans2.parentNode.removeChild(ans2);
+            ans3.parentNode.removeChild(ans3);
+            ans4.parentNode.removeChild(ans4);
+            document.body.style.backgroundColor = "#595775";
+
+            calc();
+        } else {
+            number++;
+            setUp();
+        }
+    }
+
+    function calc() {
+
+        lg = lx + xg;
+        ng = nx + xg;
+        cg = cx + xg;
+        ln = lx + xn;
+        nn = nx + xn;
+        cn = cx + xn;
+        le = lx + xe;
+        ne = nx + xe;
+        ce = cx + xe;
+        i = nn;
+        align = "nn";
+
+        if (lg > i) {
+            align = "lg";
+            i = lg;
+        }
+        if (ng > i) {
+            align = "ng";
+            i = ng;
+        }
+        if (cg > i) {
+            align = "cg";
+            i = cg;
+        }
+        if (ln > i) {
+            align = "ln";
+            i = ln;
+        }
+        if (cn > i) {
+            align = "cn";
+            i = cn;
+        }
+        if (le > i) {
+            align = "le";
+            i = le;
+        }
+        if (ne > i) {
+            align = "ne";
+            i = ne;
+        }
+        if (ce > i) {
+            align = "ce";
+            i = ce;
+        }
+
+        if (lg == i) tie++;
+        if (ng == i) tie++;
+        if (cg == i) tie++;
+        if (ln == i) tie++;
+        if (nn == i) tie++;
+        if (cn == i) tie++;
+        if (le == i) tie++;
+        if (ne == i) tie++;
+        if (ce == i) tie++;
+
+        if (tie != 0) {
+            if (lx > nx && lx > cx) align = "l";
+            else if (cx > nx && cx > lx) align = "c";
+            else align = "n";
+
+            if (xg > xe && xg > xn) align += "g";
+            else if (xe > xn && xe > xg) align += "e";
+            else align += "n";
+        }
+
+        switch (align) {
+            case "lg":
+                resulttitle.innerHTML = "你的陣營是「" + output[0]["title"] + "」。";
+                result.innerHTML = output[0]["content"];
+                break;
+            case "ng":
+                resulttitle.innerHTML = "你的陣營是「" + output[1]["title"] + "」。";
+                result.innerHTML = output[1]["content"];
+                break;
+            case "cg":
+                resulttitle.innerHTML = "你的陣營是「" + output[2]["title"] + "」。";
+                result.innerHTML = output[2]["content"];
+                break;
+            case "ln":
+                resulttitle.innerHTML = "你的陣營是「" + output[3]["title"] + "」。";
+                result.innerHTML = output[3]["content"];
+                break;
+            case "nn":
+                resulttitle.innerHTML = "你的陣營是「" + output[4]["title"] + "」。";
+                result.innerHTML = output[4]["content"];
+                break;
+            case "cn":
+                resulttitle.innerHTML = "你的陣營是「" + output[5]["title"] + "」。";
+                result.innerHTML = output[5]["content"];
+                break;
+            case "le":
+                resulttitle.innerHTML = "你的陣營是「" + output[6]["title"] + "」。";
+                result.innerHTML = output[6]["content"];
+                break;
+            case "ne":
+                resulttitle.innerHTML = "你的陣營是「" + output[7]["title"] + "」。";
+                result.innerHTML = output[7]["content"];
+                break;
+            case "ce":
+                resulttitle.innerHTML = "你的陣營是「" + output[8]["title"] + "」。";
+                result.innerHTML = output[8]["content"];
+        }
+    }
+</script>
+
+</html>
