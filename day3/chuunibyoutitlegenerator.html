@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chuunibyou Title Generator</title>
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+SC" rel="stylesheet">
+</head>
+<style>
+    @font-face {
+        font-family: "chFont";
+        src: url(font/cwTeXFangSong-zhonly.ttf) format("truetype");
+    }
+    
+    body {
+        background: #1E2D4D;
+        color: #fff;
+    }
+    
+    h2 {
+        font-size: 30px;
+        font-family: 'Alegreya SC', serif;
+        text-align: center;
+        transform: translateY(+185%);
+    }
+    
+    h3 {
+        line-height: -100px;
+        font-size: 24px;
+        font-family: 'chFont';
+        text-align: center;
+        transform: translateY(+235%);
+    }
+    
+    button {
+        background-color: #DF3573;
+        color: white;
+        text-align: center;
+        font-size: 25px;
+        border: 0;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        height: 50px;
+        width: 50px;
+        transform: translate(+320%, +100%);
+        -webkit-box-shadow: 2px 2px 2px #30347B;
+        -moz-box-shadow: 2px 2px 2px #30347B;
+        box-shadow: 2px 2px 2px #30347B;
+    }
+    
+    button:active {
+        background-color: #B0244D;
+        color: #C6BECC;
+        transform: translate(+320%, +105%);
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+    
+    #card {
+        background-color: #43549C;
+        outline: 2px dashed #5480C9;
+        outline-offset: -7.5px;
+        height: 260px;
+        width: 420px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-210px, -140px);
+        -webkit-box-shadow: 4px 4px 4px #18243D;
+        -moz-box-shadow: 4px 4px 4px #18243D;
+        box-shadow: 4px 4px 4px #18243D;
+    }
+</style>
+
+<body>
+    <div>
+        <center id="card">
+            <h2 id="gen">Chuuniyou Title Generator</h2>
+            <h3 id="ch">中二標題產生器</h3>
+            <button type="button" id="start" onClick="play()">▶</button>
+        </center>
+    </div>
+</body>
+<script>
+    var range = 30;
+    var gen = document.getElementById("gen"),
+        ch = document.getElementById("ch"),
+        button = document.getElementById("start");
+    var data = JSON.parse('[ { "adj": "Chaos", "noun": "Hymn", "cadj": "渾沌", "cnoun": "聖歌" }, { "adj": "Purgatory", "noun": "Codex", "cadj": "煉獄", "cnoun": "法典" }, { "adj": "The 13th", "noun": "Nocturne", "cadj": "第十三", "cnoun": "夜曲" }, { "adj": "Doomsday", "noun": "Arms Merchant", "cadj": "末日", "cnoun": "軍火商" }, { "adj": "Hell", "noun": "Serenade", "cadj": "地獄", "cnoun": "小夜曲" }, { "adj": "Dark", "noun": "Requiem", "cadj": "闇黑", "cnoun": "安魂曲" }, { "adj": "The Last", "noun": "Horizon", "cadj": "終末", "cnoun": "地平線" }, { "adj": "Nightmare", "noun": "Aria", "cadj": "噩夢", "cnoun": "詠嘆調" }, { "adj": "Acheron", "noun": "Princess", "cadj": "冥河", "cnoun": "王女" }, { "adj": "Devil", "noun": "Marquis", "cadj": "惡魔", "cnoun": "侯爵" }, { "adj": "Crimson", "noun": "Blood", "cadj": "緋紅", "cnoun": "血裔" }, { "adj": "Dragon", "noun": "Warfare", "cadj": "龍族", "cnoun": "戰爭" }, { "adj": "Sacred", "noun": "Reaper", "cadj": "神聖", "cnoun": "收割者" }, { "adj": "Eden", "noun": "Paradox", "cadj": "伊甸", "cnoun": "悖論" }, { "adj": "Phantom", "noun": "Project", "cadj": "幻影", "cnoun": "計畫" }, { "adj": "The Third", "noun": "Dogma", "cadj": "第三", "cnoun": "教條" }, { "adj": "Abyss", "noun": "Empire", "cadj": "深淵", "cnoun": "帝國" }, { "adj": "Cosmic", "noun": "Hunter", "cadj": "宇宙", "cnoun": "獵手" }, { "adj": "Gaia", "noun": "Lover", "cadj": "蓋婭", "cnoun": "戀人" }, { "adj": "White", "noun": "Syndrome", "cadj": "白色", "cnoun": "症候群" }, { "adj": "Scarlet", "noun": "Hypothesis", "cadj": "腥紅", "cnoun": "假說" }, { "adj": "Galaxy", "noun": "Legion", "cadj": "銀河", "cnoun": "軍團" }, { "adj": "Stardust", "noun": "Diary", "cadj": "星塵", "cnoun": "日記" }, { "adj": "Puppet", "noun": "Reverie", "cadj": "傀儡", "cnoun": "幻想" }, { "adj": "Forbidden", "noun": "Lament", "cadj": "禁斷", "cnoun": "輓歌" }, { "adj": "Angel", "noun": "Tyrant", "cadj": "天使", "cnoun": "暴君" }, { "adj": "Grey", "noun": "Knight", "cadj": "灰色", "cnoun": "騎士" }, { "adj": "Kitten", "noun": "Resonance", "cadj": "小貓", "cnoun": "共鳴" }, { "adj": "Lily", "noun": "Revolution", "cadj": "百合", "cnoun": "革命" }, { "adj": "Mech", "noun": "Maiden", "cadj": "機甲", "cnoun": "少女" } ]');
+
+    function roll() {
+        var rand1 = Math.floor(Math.random() * range);
+        var rand2 = Math.floor(Math.random() * range);
+        gen.innerHTML = data[rand1]["adj"] + " " + data[rand2]["noun"];
+        ch.innerHTML = data[rand1]["cadj"] + data[rand2]["cnoun"];
+    }
+
+    function play() {
+        var speed = 50;
+        var id;
+        for (var i = 0; i < 5000; i++) {
+            setTimeout("roll()", speed);
+        }
+    }
+</script>
+
+</html>
