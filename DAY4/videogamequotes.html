@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video Game Quotes</title>
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+</head>
+<style>
+    body {
+        background-color: #AAA;
+        font-family: 'Slabo 27px', serif;
+    }
+    
+    h2 {
+        padding: 30px;
+        font-size: 44px;
+        font-style: normal;
+        text-align: left;
+        position: absolute;
+    }
+    
+    #paper {
+        background-color: white;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 400px;
+        width: 700px;
+    }
+    
+    #answer {
+        z-index: 10;
+    }
+    
+    #content {
+        color: pink;
+        z-index: 5;
+    }
+    
+    #source {
+        color: #AAA;
+        font-size: 24px;
+        top: 250px;
+    }
+    
+    #result {
+        font-size: 30px;
+        top: 360px;
+    }
+    
+    button {
+        background-color: #DF3573;
+        color: white;
+        font-family: 'Slabo 27px', serif;
+        text-align: center;
+        font-size: 22px;
+        border: 0;
+        position: absolute;
+        height: 40px;
+        width: 180px;
+        top: 380px;
+        left: 480px;
+        -webkit-box-shadow: 2px 2px 2px #aaa;
+        -moz-box-shadow: 2px 2px 2px #aaa;
+        box-shadow: 2px 2px 2px #aaa;
+    }
+    
+    button:active {
+        background-color: #B0244D;
+        color: #C6BECC;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+</style>
+
+<body>
+    <div id="paper">
+        <h2 id="answer"></h2>
+        <h2 id="content"></h2>
+        <h2 id="source">Type the quote to train your typing speed, and see where does it come from. Note: You only need to type the letters, the input is not case-sensitive.</h2>
+        <h2 id="result"></h2>
+        <button type="button" id="start" onClick="play()">Random Quote</button>
+    </div>
+</body>
+<script>
+    var range = 21;
+    var rand = Math.floor(Math.random() * range);
+    var data = JSON.parse('[ { "quote": "What is better? To be born good or to overcome your evil nature through great effort?", "from": "Paarthurnax, Elder Scrolls V: Skyrim" }, { "quote": "The right man in the wrong place can make all the difference in the world.", "from": "G-Man, Half-Life 2" }, { "quote": "We all make choices in life, but in the end our choices make us.", "from": "Andrew Ryan, Bioshock" }, { "quote": "Stand in the ashes of a trillion dead souls, and asks the ghosts if honor matters. The silence is your answer.", "from": "Javik, Mass Effect 3" }, { "quote": "Wanting something does not give you the right to have it.", "from": "Ezio Auditore, Assassin’s Creed 2" }, { "quote": "Even after everything you\'ve done, I would have saved you.", "from": "Batman, Batman: Arkham Asylum" }, { "quote": "Science isn\’t about why! It\’s about why not!", "from": "Cave Johnson, Portal 2" }, { "quote": "A hero need not speak. When he is gone, the world will speak for him.", "from": "Master Chief, Halo" }, { "quote": "What is a man? A miserable little pile of secrets.", "from": "Dracula, Castlevania: Symphony of the Night" }, { "quote": "War. War never changes. But men do, through the roads they walk.", "from": "The narrator, Fallout: New Vegas" }, { "quote": "It\'s easy to forget what a sin is in the middle of a battlefield.", "from": "Solid Snake, Metal Gear Solid" }, { "quote": "Wait, that’s not how it happened.", "from": "Prince, Prince of Persia: The Sands of Time" }, { "quote": "Thank you Mario! But our Princess is in another castle!", "from": "Toad, Super Mario Bros" }, { "quote": "I used to be an adventurer like you, until I took an arrow to the knee.", "from": "Town Guard, Elder Scrolls V: Skyrim" }, { "quote": "Send me out...with a bang.", "from": "Sgt. Avery Johnson, Halo 3" }, { "quote": "Praise the sun!", "from": "Solaire of Astora, Dark Souls" }, { "quote": "I love Ferris wheels… The circular motion… The mechanics… They’re like collections of elegant formulas.", "from": "N, Pokemon BW" }, { "quote": "To kill for yourself is murder. To kill for your government is heroic. To kill for entertainment is harmless.", "from": "Loading Screen, Spec Ops: The Line" }, { "quote": "The closer you get to the light, the greater your shadow becomes.", "from": "Kingdom Hearts" }, { "quote": "You have to shoot me, honey.", "from": "Lee Everett, The Walking Dead" }, { "quote": "The cake is a lie.", "from": "Portal" } ]');
+    var quote = data[rand]["quote"];
+    var from = data[rand]["from"];
+    var content = document.getElementById("content"),
+        answer = document.getElementById("answer"),
+        source = document.getElementById("source"),
+        result = document.getElementById("result");
+    content.innerHTML = quote;
+    var num = 0,
+        count = 0;
+    var startTime;
+    var fin = false;
+
+    $(document).keypress(function(e) {
+        if (num == 0) startTime = new Date().getTime();
+        var keycode = (e.keyCode ? e.keyCode : e.which);
+        var ch = String.fromCharCode(keycode);
+        if (ch == quote[num].toUpperCase() || ch == quote[num].toLocaleLowerCase()) {
+            answer.innerHTML += quote[num];
+            count++;
+            num++;
+        }
+    });
+
+    function play() {
+        rand = Math.floor(Math.random() * range);
+        num = 0;
+        count = 0;
+        fin = false;
+        quote = data[rand]["quote"];
+        from = data[rand]["from"];
+        content.innerHTML = quote;
+        answer.innerHTML = "";
+        source.innerHTML = "Type the quote to train your typing speed, and see where does it come from. Note: You only need to type the letters, the input is not case-sensitive.";
+        result.innerHTML = "";
+    }
+
+    function skip() {
+        if (/^[a-zA-Z0-9-]*$/.test(quote[num]) == false) {
+            answer.innerHTML += quote[num];
+            num++;
+        }
+        if (!quote[num] && !fin) {
+            var endTime = new Date().getTime();
+            source.innerHTML = from;
+            result.innerHTML = "Typing Speed: " + (count / ((endTime - startTime) / 1000)).toFixed(2) + " cps";
+            console.log(endTime - startTime);
+            fin = true;
+        }
+    }
+    setInterval("skip()", 30);
+</script>
+
+</html>
