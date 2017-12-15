@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Norza's Gallery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+    html,
+    body {
+        background: black;
+        overflow: hidden;
+    }
+    
+    h1 {
+        color: #A98;
+    }
+    
+    .container {
+        background: #976;
+    }
+    
+    .gallery {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        float: left;
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+        opacity: 0.6;
+        transition: ease-out 0.8s;
+        cursor: pointer;
+    }
+    
+    .gallery:last-child {
+        float: left;
+    }
+    
+    .on {
+        opacity: 1.0;
+        position: absolute;
+        width: 800px;
+        height: 600px;
+        left: 50%;
+        top: 0%;
+        transform: translate(-50%, -100%);
+        background-size: contain;
+        z-index: 10;
+    }
+    
+    .off {
+        width: 5%;
+        background-size: cover;
+        z-index: 5;
+    }
+    
+    .close {
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%, -100%);
+        overflow: inherit;
+    }
+</style>
+
+<body>
+    <h1>Norza's Gallery</h1>
+    <center>
+        <div class='container close'>
+            <div class='gallery gallery1 off' style='background-image:url(pic/3.jpg);'></div>
+            <div class='gallery gallery2 off' style='background-image:url(pic/4.jpg);'></div>
+            <div class='gallery gallery3 off' style='background-image:url(pic/5.jpg);'></div>
+            <div class='gallery gallery4 off' style='background-image:url(pic/1.png); '></div>
+            <div class='gallery gallery5 off' style='background-image:url(pic/6.png);'></div>
+            <div class='gallery gallery6 off' style='background-image:url(pic/8.jpg);'></div>
+            <div class='gallery gallery7 off' style='background-image:url(pic/7.png);'></div>
+        </div>
+    </center>
+</body>
+<script>
+    $(document).ready(function() {
+        $('.gallery').click(function() {
+            $('.gallery').removeClass('on');
+            $('.gallery').removeClass('off');
+            $(this).addClass('on');
+            $(this).siblings().addClass('off');
+        });
+    });
+</script>
+
+</html>
