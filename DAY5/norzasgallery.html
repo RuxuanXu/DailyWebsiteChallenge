@@ -20,6 +20,13 @@
     
     .container {
         background: #976;
+        position: absolute;
+        height: 10%;
+        width: 100%;
+        left: 50%;
+        top: 100%;
+        transform: translate(-50%, -100%);
+        overflow: inherit;
     }
     
     .gallery {
@@ -56,22 +63,12 @@
         background-size: cover;
         z-index: 5;
     }
-    
-    .close {
-        position: absolute;
-        height: 10%;
-        width: 100%;
-        left: 50%;
-        top: 100%;
-        transform: translate(-50%, -100%);
-        overflow: inherit;
-    }
 </style>
 
 <body>
     <h1>&nbsp&nbspNorza's Gallery</h1>
     <center>
-        <div class='container close'>
+        <div class='container'>
             <div class='gallery gallery1 off' style='background-image:url(pic/3.jpg);'></div>
             <div class='gallery gallery2 off' style='background-image:url(pic/4.jpg);'></div>
             <div class='gallery gallery3 off' style='background-image:url(pic/5.jpg);'></div>
