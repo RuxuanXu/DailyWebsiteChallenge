@@ -4,22 +4,26 @@
 <head>
     <title>Norza's Gallery</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pangolin" rel="stylesheet">
 </head>
 <style>
     html,
     body {
-        background: black;
         overflow: hidden;
-        font-family: 'Homemade Apple', cursive;
+        font-family: 'Pangolin', cursive;
     }
     
     h1 {
-        color: #A98;
+        opacity: 0.6;
+        font-weight: normal;
+        position: absolute;
+        top: 78%;
+        left: 20px;
+        z-index: 15;
     }
     
     .container {
-        background: #976;
+        background: white;
         position: absolute;
         height: 10%;
         width: 100%;
@@ -32,14 +36,15 @@
     .gallery {
         background-position: center;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
         float: left;
         position: relative;
         height: 100%;
         overflow: hidden;
-        opacity: 0.6;
+        opacity: 0.5;
         transition: ease-out 0.8s;
         cursor: pointer;
+        z-index: 5;
     }
     
     .gallery:last-child {
@@ -48,8 +53,8 @@
     
     .on {
         opacity: 1.0;
+        background-color: white;
         position: absolute;
-        width: 800px;
         left: 50%;
         top: 0%;
         transform: translate(-50%, -100%);
@@ -59,13 +64,14 @@
     
     .off {
         width: 5%;
+        background-position: center;
         background-size: cover;
         z-index: 5;
     }
 </style>
 
 <body>
-    <h1>&nbsp&nbspNorza's Gallery</h1>
+    <h1>Norza's Gallery</h1>
     <center>
         <div class='container'>
             <div class='gallery gallery1 off' style='background-image:url(pic/3.jpg);'></div>
@@ -94,11 +100,14 @@
 <script>
     $(document).ready(function() {
         $('.gallery').click(function() {
-            $('.gallery').removeClass('on');
             $('.gallery').removeClass('off');
             $(this).addClass('on');
+            $(this).css("width", $(window).width());
             $(this).css("height", $(window).height() * .9);
+            $(this).siblings().removeClass('on');
             $(this).siblings().addClass('off');
+            $(this).siblings().css("height", $(window).height() * .1);
+            $(this).siblings().css("width", "5%");
         });
     });
 </script>
