@@ -50,7 +50,6 @@
         opacity: 1.0;
         position: absolute;
         width: 800px;
-        height: 600px;
         left: 50%;
         top: 0%;
         transform: translate(-50%, -100%);
@@ -98,6 +97,7 @@
             $('.gallery').removeClass('on');
             $('.gallery').removeClass('off');
             $(this).addClass('on');
+            $(this).css("height", $(window).height() * .9);
             $(this).siblings().addClass('off');
         });
     });
