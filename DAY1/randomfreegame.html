@@ -84,22 +84,18 @@
         pic.src = "pic/button.png";
         pic1.src = "pic/button-click.png";
         pic2.src = "pic/button-hover.png";
-        pic.onload = function() {
-            pic1.onload = function() {
-                pic2.onload = function() {
-                    $(".loader").remove();
-                    $("#button").hover(function() {
-                        $("#button").css("background-image", "url('pic/button-hover.png')");
-                    }, function() {
-                        $("#button").css("background-image", "url('pic/button.png')");
-                    });
-                    $("#button").click(function() {
-                        $("#button").css("background-image", "url('pic/button-click.png')");
-                        Redirect();
-                    });
-                }
-            }
-        }
+        window.addEventListener("load", function() {
+            $(".loader").remove();
+            $("#button").hover(function() {
+                $("#button").css("background-image", "url('pic/button-hover.png')");
+            }, function() {
+                $("#button").css("background-image", "url('pic/button.png')");
+            });
+            $("#button").click(function() {
+                $("#button").css("background-image", "url('pic/button-click.png')");
+                Redirect();
+            });
+        });
 
         function Redirect() {
             window.location.assign(randomWebpage);
