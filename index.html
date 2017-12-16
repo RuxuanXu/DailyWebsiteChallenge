@@ -16,6 +16,8 @@
         font-size: 16px;
     }
     
+    a,
+    .input,
     .cmd {
         background-color: transparent;
         border: none;
@@ -24,28 +26,63 @@
         font-family: Consolas;
         font-size: 16px;
         width: 60%;
+        padding-left: -100px;
     }
-    
-    =
 </style>
 
 <body>
     <div>Hello World! Welcome to my secret playground.</div>
-    <div class="cmd">
-        <div class="input"><br/>
-            <div>guest@playground: ~$&nbsp;
-                <input class="cmd" data-input="data-input" />
-            </div>
+    <div>
+        <div class="cmd"><br/> </div>
+        <div>guest@playground: ~$
+            <input class="input" data-input="data-input" />
         </div>
-    </div>
-    <p><a href="https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY1/randomfreegame.html">DAY 1</a></p>
-    <p><a href="https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY2/dndalignmenttest.html">DAY 2</a></p>
-    <p><a href="https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY3/chuunibyoutitlegenerator.html">DAY 3</a></p>
-    <p><a href="https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY4/videogamequotes.html">DAY 4</a></p>
-    <p><a href="https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY5/norzasgallery.html">DAY 5</a></p>
-</body>
 
+    </div>
+</body>
 <script>
+    var input, low;
+    $(document).on('mouseup', function() {
+        $(".input").focus();
+    });
+
+    function print(msg) {
+        $("<div>" + msg + "</div>").appendTo("div.cmd");
+    }
+
+    function link(to, name) {
+        $("<div><a href='" + to + "'>" + name + "</a></div>").appendTo("div.cmd");
+    }
+
+    $(".input").on('keydown', function(e) {
+        if (e.which == 13) {
+            input = $(".input").val();
+            low = input.toLowerCase();
+            print("guest@playground: ~$&nbsp;" + input);
+            if (low == "help") {
+                print("Available Commands:");
+                print("&nbsp");
+                print("help&nbsp&nbsp&nbsp&nbsp&nbsp&nbspShow help.");
+                print("link&nbsp&nbsp&nbsp&nbsp&nbsp&nbspGet the links to Ruxuan's Daily Website Challenge.");
+                print("&nbsp");
+            } else if (low == "link") {
+                print("Ruxuan's Daily Website Challenge:")
+                print("&nbsp");
+                link("https://ruxuanxu.github.io/DailyWebsiteChallenge/", "DAY 0: Secret Playground");
+                link("https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY1/randomfreegame.html", "DAY 1: Random Free Game");
+                link("https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY2/dndalignmenttest.html", "DAY 2: DnD Alignment Test");
+                link("https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY3/chuunibyoutitlegenerator.html", "DAY 3: Chuunibyou Title Generator");
+                link("https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY4/videogamequotes.html", "DAY 4: Video Game Quotes");
+                link("https://rawgit.com/RuxuanXu/DailyWebsiteChallenge/master/DAY5/norzasgallery.html", "DAY 5: Norza's Gallery");
+                print("&nbsp");
+            } else if (low == "hello" || low == "hi") {
+                print("Hi there.");
+            } else {
+                print(input + ": command not found. See 'help'.");
+            }
+            $(".input").val("");
+        }
+    });
 </script>
 
 </html>
