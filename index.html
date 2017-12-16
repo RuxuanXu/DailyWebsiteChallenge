@@ -55,7 +55,7 @@
     }
 
     $(".input").on('keydown', function(e) {
-        if (e.which == 13) {
+        if (e.which == 13 && $(".input").val()) {
             input = $(".input").val();
             low = input.toLowerCase();
             print("guest@playground: ~$&nbsp;" + input);
