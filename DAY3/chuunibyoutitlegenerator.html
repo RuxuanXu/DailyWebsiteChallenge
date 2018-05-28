@@ -82,11 +82,20 @@
     </div>
 </body>
 <script>
-    var range = 30;
     var gen = document.getElementById("gen"),
         ch = document.getElementById("ch"),
         button = document.getElementById("start");
     var data = JSON.parse('[ { "adj": "Chaos", "noun": "Hymn", "cadj": "渾沌", "cnoun": "聖歌" }, { "adj": "Purgatory", "noun": "Codex", "cadj": "煉獄", "cnoun": "法典" }, { "adj": "The 13th", "noun": "Nocturne", "cadj": "第十三", "cnoun": "夜曲" }, { "adj": "Doomsday", "noun": "Arms Merchant", "cadj": "末日", "cnoun": "軍火商" }, { "adj": "Hell", "noun": "Serenade", "cadj": "地獄", "cnoun": "小夜曲" }, { "adj": "Dark", "noun": "Requiem", "cadj": "闇黑", "cnoun": "安魂曲" }, { "adj": "The Last", "noun": "Horizon", "cadj": "終末", "cnoun": "地平線" }, { "adj": "Nightmare", "noun": "Aria", "cadj": "噩夢", "cnoun": "詠嘆調" }, { "adj": "Acheron", "noun": "Princess", "cadj": "冥河", "cnoun": "王女" }, { "adj": "Devil", "noun": "Marquis", "cadj": "惡魔", "cnoun": "侯爵" }, { "adj": "Crimson", "noun": "Blood", "cadj": "緋紅", "cnoun": "血裔" }, { "adj": "Dragon", "noun": "Warfare", "cadj": "龍族", "cnoun": "戰爭" }, { "adj": "Sacred", "noun": "Reaper", "cadj": "神聖", "cnoun": "收割者" }, { "adj": "Eden", "noun": "Paradox", "cadj": "伊甸", "cnoun": "悖論" }, { "adj": "Phantom", "noun": "Project", "cadj": "幻影", "cnoun": "計畫" }, { "adj": "The Third", "noun": "Dogma", "cadj": "第三", "cnoun": "教條" }, { "adj": "Abyss", "noun": "Empire", "cadj": "深淵", "cnoun": "帝國" }, { "adj": "Cosmic", "noun": "Hunter", "cadj": "宇宙", "cnoun": "獵手" }, { "adj": "Gaia", "noun": "Lover", "cadj": "蓋婭", "cnoun": "戀人" }, { "adj": "White", "noun": "Syndrome", "cadj": "白色", "cnoun": "症候群" }, { "adj": "Scarlet", "noun": "Hypothesis", "cadj": "腥紅", "cnoun": "假說" }, { "adj": "Galaxy", "noun": "Legion", "cadj": "銀河", "cnoun": "軍團" }, { "adj": "Stardust", "noun": "Diary", "cadj": "星塵", "cnoun": "日記" }, { "adj": "Puppet", "noun": "Reverie", "cadj": "傀儡", "cnoun": "幻想" }, { "adj": "Forbidden", "noun": "Lament", "cadj": "禁斷", "cnoun": "輓歌" }, { "adj": "Angel", "noun": "Tyrant", "cadj": "天使", "cnoun": "暴君" }, { "adj": "Grey", "noun": "Knight", "cadj": "灰色", "cnoun": "騎士" }, { "adj": "Kitten", "noun": "Resonance", "cadj": "小貓", "cnoun": "共鳴" }, { "adj": "Lily", "noun": "Revolution", "cadj": "百合", "cnoun": "革命" }, { "adj": "Mech", "noun": "Maiden", "cadj": "機甲", "cnoun": "少女" } ]');
+    var range = getSize(data);
+    console.log(range);
+
+    function getSize(obj) {
+        var size = 0;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    }
 
     function roll() {
         var rand1 = Math.floor(Math.random() * range);
