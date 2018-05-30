@@ -13,6 +13,12 @@
         font-family: 'Slabo 27px', serif;
     }
     
+    h1 {
+        color: #777;
+        font-size: 44px;
+        text-align: center;
+    }
+    
     h2 {
         padding: 30px;
         font-size: 44px;
@@ -24,7 +30,7 @@
     #paper {
         background-color: white;
         position: absolute;
-        top: 50px;
+        top: 110px;
         left: 50%;
         transform: translateX(-50%);
         height: 400px;
@@ -43,12 +49,12 @@
     #source {
         color: #AAA;
         font-size: 24px;
-        top: 250px;
+        top: 270px;
     }
     
     #result {
         font-size: 30px;
-        top: 360px;
+        top: 350px;
     }
     
     button {
@@ -75,21 +81,43 @@
         -moz-box-shadow: none;
         box-shadow: none;
     }
+    
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 5px;
+        width: 100%;
+        color: white;
+        text-align: center;
+    }
 </style>
 
 <body>
+    <h1>Video Game Quotes</h1>
+
     <div id="paper">
         <h2 id="answer"></h2>
         <h2 id="content"></h2>
-        <h2 id="source">Type the quote to train your typing speed, and see where does it come from. Note: You only need to type the letters, the input is not case-sensitive.</h2>
+        <h2 id="source">Type the quote to train your typing speed, and see where does it come from. The input is not case-sensitive.</h2>
         <h2 id="result"></h2>
         <button type="button" id="start" onClick="play()">Random Quote</button>
     </div>
+
+    <div class="footer">
+        <footer>
+            Made by Ruxuan Xu |
+            <a href="https://github.com/RuxuanXu/DailyWebsiteChallenge/blob/master/DAY4/videogamequotes.html">
+                    View on GitHub
+            </a> | All quotes are copyright to their respective owners
+        </footer>
+    </div>
+
 </body>
+
 <script>
-    var range = 25;
+    var range = 31;
     var rand = Math.floor(Math.random() * range);
-    var data = JSON.parse('[ { "quote": "What is better? To be born good or to \\novercome your evil nature through \\ngreat effort?", "from": "Paarthurnax, Elder Scrolls V: Skyrim" }, { "quote": "The right man in the wrong place \\ncan make all the difference in the \\nworld.", "from": "G-Man, Half-Life 2" }, { "quote": "We all make choices in life, but in \\nthe end our choices make us.", "from": "Andrew Ryan, Bioshock" }, { "quote": "Stand in the ashes of a trillion dead \\nsouls, and asks the ghosts if honor \\nmatters. The silence is your answer.", "from": "Javik, Mass Effect 3" }, { "quote": "Wanting something does not give \\nyou the right to have it.", "from": "Ezio Auditore, Assassin’s Creed 2" }, { "quote": "Even after everything you\'ve done, I \\nwould have saved you.", "from": "Batman, Batman: Arkham Asylum" }, { "quote": "Science isn\’t about why! It\’s about \\nwhy not!", "from": "Cave Johnson, Portal 2" }, { "quote": "A hero need not speak. When he is \\ngone, the world will speak for him.", "from": "Master Chief, Halo" }, { "quote": "What is a man? A miserable little \\npile of secrets.", "from": "Dracula, Castlevania: Symphony of the Night" }, { "quote": "War. War never changes. But men \\ndo, through the roads they walk.", "from": "The narrator, Fallout: New Vegas" }, { "quote": "It\'s easy to forget what a sin is in the \\nmiddle of a battlefield.", "from": "Solid Snake, Metal Gear Solid" }, { "quote": "Wait, that’s not how it happened.", "from": "Prince, Prince of Persia: The Sands of Time" }, { "quote": "Thank you Mario! But our Princess is \\nin another castle!", "from": "Toad, Super Mario Bros" }, { "quote": "I used to be an adventurer like you, \\nuntil I took an arrow to the knee.", "from": "Town Guard, Elder Scrolls V: Skyrim" }, { "quote": "Send me out...with a bang.", "from": "Sgt. Avery Johnson, Halo 3" }, { "quote": "Praise the sun!", "from": "Solaire of Astora, Dark Souls" }, { "quote": "I love Ferris wheels… The circular \\nmotion… The mechanics… They’re \\nlike collections of elegant formulas.", "from": "N, Pokemon BW" }, { "quote": "To kill for yourself is murder. To kill \\nfor your government is heroic. To kill \\nfor entertainment is harmless.", "from": "Loading Screen, Spec Ops: The Line" }, { "quote": "The closer you get to the light, the \\ngreater your shadow becomes.", "from": "Kingdom Hearts" }, { "quote": "You have to shoot me, honey.", "from": "Lee Everett, The Walking Dead" }, { "quote": "The cake is a lie.", "from": "Portal" }, { "quote": "Don\'t wish it were easier, wish you \\nwere better.", "from": "Chief, Animal Crossing" }, { "quote": "Without passion, you are already \\ndead.", "from": "Max Payne, Max Payne 2" }, { "quote": "You can\’t undo what you\’ve already \\ndone, but you can face up to it.", "from": "Frank Coleridge, Silent Hill: Downpour" }, { "quote": "Steel wins battles. Gold wins wars.", "from": "DOTA" } ]');
+    var data = JSON.parse('[ { "quote": "What is better? To be born good or to \\novercome your evil nature through \\ngreat effort?", "from": "Paarthurnax, Elder Scrolls V: Skyrim" }, { "quote": "The right man in the wrong place \\ncan make all the difference in the \\nworld.", "from": "G-Man, Half-Life 2" }, { "quote": "We all make choices in life, but in \\nthe end our choices make us.", "from": "Andrew Ryan, Bioshock" }, { "quote": "Stand in the ashes of a trillion dead \\nsouls, and asks the ghosts if honor \\nmatters. The silence is your answer.", "from": "Javik, Mass Effect 3" }, { "quote": "Wanting something does not give \\nyou the right to have it.", "from": "Ezio Auditore, Assassin\'s Creed 2" }, { "quote": "Even after everything you\'ve done, I \\nwould have saved you.", "from": "Batman, Batman: Arkham Asylum" }, { "quote": "Science isn\'t about why! It\'s about \\nwhy not!", "from": "Cave Johnson, Portal 2" }, { "quote": "A hero need not speak. When he is \\ngone, the world will speak for him.", "from": "Master Chief, Halo" }, { "quote": "What is a man? A miserable little \\npile of secrets.", "from": "Dracula, Castlevania: Symphony of the Night" }, { "quote": "War. War never changes. But men \\ndo, through the roads they walk.", "from": "The narrator, Fallout: New Vegas" }, { "quote": "It\'s easy to forget what a sin is in the \\nmiddle of a battlefield.", "from": "Solid Snake, Metal Gear Solid" }, { "quote": "Wait, that\'s not how it happened.", "from": "Prince, Prince of Persia: The Sands of Time" }, { "quote": "Thank you Mario! But our Princess is \\nin another castle!", "from": "Toad, Super Mario Bros" }, { "quote": "I used to be an adventurer like you, \\nuntil I took an arrow to the knee.", "from": "Town Guard, Elder Scrolls V: Skyrim" }, { "quote": "Send me out...with a bang.", "from": "Sgt. Avery Johnson, Halo 3" }, { "quote": "Praise the sun!", "from": "Solaire of Astora, Dark Souls" }, { "quote": "I love Ferris wheels… The circular \\nmotion… The mechanics… They\'re \\nlike collections of elegant formulas.", "from": "N, Pokemon BW" }, { "quote": "To kill for yourself is murder. To kill \\nfor your government is heroic. To kill \\nfor entertainment is harmless.", "from": "Loading Screen, Spec Ops: The Line" }, { "quote": "The closer you get to the light, the \\ngreater your shadow becomes.", "from": "Kingdom Hearts" }, { "quote": "You have to shoot me, honey.", "from": "Lee Everett, The Walking Dead" }, { "quote": "The cake is a lie.", "from": "Portal" }, { "quote": "Don\'t wish it were easier, wish you \\nwere better.", "from": "Chief, Animal Crossing" }, { "quote": "Without passion, you are already \\ndead.", "from": "Max Payne, Max Payne 2" }, { "quote": "You can\'t undo what you\'ve already \\ndone, but you can face up to it.", "from": "Frank Coleridge, Silent Hill: Downpour" }, { "quote": "Steel wins battles. Gold wins wars.", "from": "DOTA" },{ "quote": "It\'s dangerous when too many men\\n in the same armor think they\'re\\n right.", "from": "Cole, Dragon Age: Inquisition" },{ "quote": "Nothing is true, everything is\\n permitted.", "from": "Altair, Assassin\'s Creed 1" },{ "quote": "Love is just a chemical. We give it\\n meaning through choice.", "from": "Eleanor Lamb, BioShock 2" } ,{ "quote": "If history only remembers one in a\\n thousands of us, then the future will\\n be filled with stories of who we were\\n and what we did.", "from": "Harlem Hellfighter, Battlefield 1" },{ "quote": "Every lie contains the truth, and\\n every truth contains a lie.", "from": "Shu, Suikoden II" },{ "quote": "The ending isn\'t any more important\\n than any of the moments leading to\\n it.", "from": "Dr Rosalene, To The Moon" }]');
     var quote = data[rand]["quote"];
     var from = data[rand]["from"];
     var content = document.getElementById("content"),
@@ -104,13 +132,16 @@
 
     $(document).keypress(function(e) {
         if (num == 0) startTime = new Date().getTime();
-        var keycode = (e.keyCode ? e.keyCode : e.which);
-        var ch = String.fromCharCode(keycode);
-        if (ch == quote[num].toUpperCase() || ch == quote[num].toLocaleLowerCase()) {
-            answer.innerHTML += quote[num];
-            count++;
-            num++;
+        if (num < quote.length) {
+            var keycode = (e.keyCode ? e.keyCode : e.which);
+            var ch = String.fromCharCode(keycode);
+            if (ch == quote[num] || ch == quote[num].toUpperCase() || ch == quote[num].toLocaleLowerCase()) {
+                answer.innerHTML += quote[num];
+                count++;
+                num++;
+            }
         }
+        document.getElementById("start").blur();
     });
 
     function play() {
@@ -122,12 +153,12 @@
         from = data[rand]["from"];
         content.innerHTML = quote;
         answer.innerHTML = "";
-        source.innerHTML = "Type the quote to train your typing speed, and see where does it come from. Note: You only need to type the letters, the input is not case-sensitive.";
+        source.innerHTML = "Type the quote to train your typing speed, and see where does it come from. The input is not case-sensitive.";
         result.innerHTML = "";
     }
 
     function skip() {
-        if (/^[a-zA-Z0-9-]*$/.test(quote[num]) == false) {
+        if (/^[a-zA-Z0-9-,.'!? \r\t\n\f]*$/.test(quote[num]) == false) {
             answer.innerHTML += quote[num];
             num++;
         }
@@ -135,7 +166,6 @@
             var endTime = new Date().getTime();
             source.innerHTML = from;
             result.innerHTML = "Typing Speed: " + (count / ((endTime - startTime) / 1000)).toFixed(2) + " cps";
-            console.log(endTime - startTime);
             fin = true;
         }
         if (quote[num] == "\n") {
@@ -143,6 +173,7 @@
             num++;
         }
     }
+
     setInterval("skip()", 30);
 </script>
 
