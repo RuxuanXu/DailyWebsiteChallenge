@@ -1,0 +1,38 @@
+function getSize(obj) {
+    var size = 0;
+    for (key in obj)
+        if (obj.hasOwnProperty(key)) size++;
+    return size;
+}
+
+function roll() {
+    var gen = document.getElementById("gen"),
+    ch = document.getElementById("ch"),
+    button = document.getElementById("start");
+    var data = JSON.parse('[ { "adj": "Chaos", "noun": "Hymn", "cadj": "渾沌", "cnoun": "聖歌" }, { "adj": "Purgatory", "noun": "Codex", "cadj": "煉獄", "cnoun": "法典" }, { "adj": "The 13th", "noun": "Nocturne", "cadj": "第十三", "cnoun": "夜曲" }, { "adj": "Doomsday", "noun": "Arms Merchant", "cadj": "末日", "cnoun": "軍火商" }, { "adj": "Hell", "noun": "Serenade", "cadj": "地獄", "cnoun": "小夜曲" }, { "adj": "Dark", "noun": "Requiem", "cadj": "闇黑", "cnoun": "安魂曲" }, { "adj": "The Last", "noun": "Horizon", "cadj": "終末", "cnoun": "地平線" }, { "adj": "Nightmare", "noun": "Aria", "cadj": "噩夢", "cnoun": "詠嘆調" }, { "adj": "Acheron", "noun": "Princess", "cadj": "冥河", "cnoun": "王女" }, { "adj": "Devil", "noun": "Marquis", "cadj": "惡魔", "cnoun": "侯爵" }, { "adj": "Crimson", "noun": "Blood", "cadj": "緋紅", "cnoun": "血裔" }, { "adj": "Dragon", "noun": "Warfare", "cadj": "龍族", "cnoun": "戰爭" }, { "adj": "Sacred", "noun": "Reaper", "cadj": "神聖", "cnoun": "收割者" }, { "adj": "Eden", "noun": "Paradox", "cadj": "伊甸", "cnoun": "悖論" }, { "adj": "Phantom", "noun": "Project", "cadj": "幻影", "cnoun": "計畫" }, { "adj": "The Third", "noun": "Dogma", "cadj": "第三", "cnoun": "教條" }, { "adj": "Abyss", "noun": "Empire", "cadj": "深淵", "cnoun": "帝國" }, { "adj": "Cosmic", "noun": "Hunter", "cadj": "宇宙", "cnoun": "獵手" }, { "adj": "Gaia", "noun": "Lover", "cadj": "蓋婭", "cnoun": "戀人" }, { "adj": "White", "noun": "Syndrome", "cadj": "白色", "cnoun": "症候群" }, { "adj": "Scarlet", "noun": "Hypothesis", "cadj": "猩紅", "cnoun": "假說" }, { "adj": "Galaxy", "noun": "Legion", "cadj": "銀河", "cnoun": "軍團" }, { "adj": "Stardust", "noun": "Diary", "cadj": "星塵", "cnoun": "日記" }, { "adj": "Puppet", "noun": "Reverie", "cadj": "傀儡", "cnoun": "幻想" }, { "adj": "Forbidden", "noun": "Lament", "cadj": "禁斷", "cnoun": "輓歌" }, { "adj": "Angel", "noun": "Tyrant", "cadj": "天使", "cnoun": "暴君" }, { "adj": "Grey", "noun": "Knight", "cadj": "灰色", "cnoun": "騎士" }, { "adj": "Kitten", "noun": "Resonance", "cadj": "小貓", "cnoun": "共鳴" }, { "adj": "Lily", "noun": "Revolution", "cadj": "百合", "cnoun": "革命" }, { "adj": "Mech", "noun": "Maiden", "cadj": "機甲", "cnoun": "少女" }, { "adj": "Azure", "noun": "Alliance", "cadj": "蒼藍", "cnoun": "同盟" }, { "adj": "Pluto", "noun": "Fortress", "cadj": "冥王星", "cnoun": "要塞" }, { "adj": "Soul", "noun": "Mutant", "cadj": "靈魂", "cnoun": "突變體" }, { "adj": "Blaze", "noun": "Remains", "cadj": "熾焰", "cnoun": "遺址" }, { "adj": "Emerald", "noun": "Fighter", "cadj": "翡翠", "cnoun": "鬥士" }, { "adj": "Wasteland", "noun": "Totem", "cadj": "荒原", "cnoun": "圖騰" }, { "adj": "Parallel", "noun": "Hero", "cadj": "平行", "cnoun": "英雄" }, { "adj": "Shadow", "noun": "Scroll", "cadj": "暗影", "cnoun": "卷軸" }, { "adj": "Nirvana", "noun": "Saga", "cadj": "極樂", "cnoun": "傳說" }, { "adj": "Monster", "noun": "Samsara", "cadj": "魔物", "cnoun": "輪迴" }, { "adj": "Devildom", "noun": "Alchemist", "cadj": "魔域", "cnoun": "煉金士" }, { "adj": "Necro", "noun": "Dancer", "cadj": "死靈", "cnoun": "舞者" }, { "adj": "Hollow", "noun": "Gene", "cadj": "虛空", "cnoun": "遺傳子" }, { "adj": "Silver Fox", "noun": "Quarantine", "cadj": "銀狐", "cnoun": "隔離區" }, { "adj": "Rosy", "noun": "Tales", "cadj": "薔薇", "cnoun": "物語" }, { "adj": "Zero Hour", "noun": "Game", "cadj": "零點", "cnoun": "遊戲" }, { "adj": "Nether", "noun": "Revelation", "cadj": "幽冥", "cnoun": "啟示錄" }, { "adj": "Ghost", "noun": "Ranger", "cadj": "魍魎", "cnoun": "俠客" }, { "adj": "Stray Dog", "noun": "Curse", "cadj": "野犬", "cnoun": "詛咒" }, { "adj": "Labyrinth", "noun": "Pledge", "cadj": "迷宮", "cnoun": "誓約" }, { "adj": "Armageddon", "noun": "Rain", "cadj": "末世", "cnoun": "雨" }, { "adj": "Babylon", "noun": "Season", "cadj": "巴比倫", "cnoun": "季節" }, { "adj": "Sky", "noun": "Killer", "cadj": "空中", "cnoun": "殺手" }, { "adj": "Dawn", "noun": "Paladin", "cadj": "晨曦", "cnoun": "聖騎士" }, { "adj": "Nightfall", "noun": "Order", "cadj": "黃昏", "cnoun": "指令" }, { "adj": "Outlaw", "noun": "Bandit", "cadj": "法外", "cnoun": "大盜" }, { "adj": "Shark", "noun": "Garden", "cadj": "鯊魚", "cnoun": "庭園" }, { "adj": "Avarice", "noun": "Illusion", "cadj": "貪欲", "cnoun": "幻境" }, { "adj": "Cyber", "noun": "Limbo", "cadj": "賽博", "cnoun": "邊獄" }, { "adj": "Chimera", "noun": "Coastline", "cadj": "幻獸", "cnoun": "海岸線" }, { "adj": "Deep Sea", "noun": "Prince", "cadj": "深海", "cnoun": "王子" }, { "adj": "Solar", "noun": "Defector", "cadj": "太陽", "cnoun": "叛逃者" }, { "adj": "Electronic", "noun": "Emperor", "cadj": "電子", "cnoun": "皇" }, { "adj": "Elf", "noun": "Fruit", "cadj": "精靈", "cnoun": "果實" }, { "adj": "Solomon", "noun": "Judge", "cadj": "所羅門", "cnoun": "審判者" }, { "adj": "Black", "noun": "Lord", "cadj": "黑色", "cnoun": "領主" }, { "adj": "Cross", "noun": "House", "cadj": "十字", "cnoun": "之家" }, { "adj": "Hell Flame", "noun": "Wings", "cadj": "業火", "cnoun": "之翼" }, { "adj": "Assassin", "noun": "Heart", "cadj": "刺客", "cnoun": "之心" }, { "adj": "Fallen", "noun": "King", "cadj": "闇墮", "cnoun": "王者" }, { "adj": "Undead", "noun": "Cannon", "cadj": "亡靈", "cnoun": "加農砲" }, { "adj": "Eclipse", "noun": "Test Subject", "cadj": "日蝕", "cnoun": "實驗體" }, { "adj": "Ganges", "noun": "Gate", "cadj": "恆河", "cnoun": "門" }, { "adj": "Penumbra", "noun": "Priest", "cadj": "月影", "cnoun": "祭司" }, { "adj": "Witch", "noun": "Oracle", "cadj": "魔女", "cnoun": "神諭" }, { "adj": "Horus", "noun": "Chain", "cadj": "荷魯斯", "cnoun": "鎖鍊" }, { "adj": "Apollo", "noun": "Guider", "cadj": "阿波羅", "cnoun": "引導人" }, { "adj": "Sadgatih", "noun": "Ruler", "cadj": "六道", "cnoun": "支配者" }, { "adj": "Shatter", "noun": "Oiran", "cadj": "碎滅", "cnoun": "花魁" }, { "adj": "Island", "noun": "Spell", "cadj": "孤島", "cnoun": "咒縛" }, { "adj": "Centaur", "noun": "Lock", "cadj": "半人馬", "cnoun": "之鎖" }, { "adj": "T-Rex", "noun": "Hime", "cadj": "暴龍", "cnoun": "姬" }, { "adj": "Comet", "noun": "Destroyer", "cadj": "殞星", "cnoun": "破壞者" }, { "adj": "Thousand-Eyes", "noun": "Asura", "cadj": "千眼", "cnoun": "阿修羅" }, { "adj": "Death", "noun": "Mercury", "cadj": "死神", "cnoun": "信使" }, { "adj": "Black Hole", "noun": "Caesar", "cadj": "黑洞", "cnoun": "凱薩" }, { "adj": "Satellite", "noun": "Blade", "cadj": "衛星", "cnoun": "劍閃" }, { "adj": "Destiny", "noun": "Cyclone", "cadj": "命運", "cnoun": "旋風" }, { "adj": "Twins", "noun": "Exclusion Zone", "cadj": "雙生", "cnoun": "禁區" }, { "adj": "Sakura", "noun": "Catastrophe", "cadj": "紅櫻", "cnoun": "災厄" }, { "adj": "Void", "noun": "Warlock", "cadj": "虛空", "cnoun": "術士" } ]');
+    var range = getSize(data);
+    var rand1 = Math.floor(Math.random() * range);
+    var rand2 = Math.floor(Math.random() * range);
+    gen.innerHTML = data[rand1]["adj"] + " " + data[rand2]["noun"];
+    ch.innerHTML = data[rand1]["cadj"] + data[rand2]["cnoun"];
+}
+
+function play() {
+    var speed = 50;
+    var id;
+    for (var i = 0; i < 5000; i++)
+        setTimeout("roll()", speed);
+}
+
+function resizeWindow() {
+    var $ = window.$;
+    var card = document.getElementById("card");
+    card.style.width = "90%";
+    if($('#card').width()>600){
+        card.style.width = "600px";
+    }
+    card.style.height = $('#card').width() *0.6 + "px";
+    document.body.style.fontSize = $('#card').height() *0.065 + "px";
+}
+
+setInterval(resizeWindow, 50);

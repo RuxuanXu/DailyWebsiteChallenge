@@ -1,0 +1,92 @@
+@font-face {
+    font-family: "chFont";
+    src: url(font/cwTeXFangSong-zhonly.ttf) format("truetype");
+}
+    
+body {
+    background: #1E2D4D;
+    color: #fff;
+    overflow: hidden;
+}
+
+#txt {
+    position: absolute;
+    height:10%;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    margin:auto;
+    transform: translate(0, -58%);
+}
+    
+#gen {
+    font-size: 1.8em;
+    font-family: 'Alegreya SC', serif;
+    text-align: center;
+    top: 40%;
+}
+    
+#ch {
+    font-size: 1.5em;
+    font-family: 'chFont';
+    text-align: center;
+    top: 55%;
+}
+    
+button {
+    background-color: #DF3573;
+    color: white;
+    text-align: center;
+    position: absolute;
+    font-size: 1.6em;
+    border: 0;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    height: 1.6em;
+    width: 1.6em;
+    right:0.8em;
+    bottom:0.8em;
+    -webkit-box-shadow: 2px 2px 2px #30347B;
+    -moz-box-shadow: 2px 2px 2px #30347B;
+    box-shadow: 2px 2px 2px #30347B;
+}
+    
+button:active {
+    background-color: #B0244D;
+    color: #C6BECC;
+    transform: translate(0, +5%);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+    
+#card {
+    background-color: #43549C;
+    outline: 0.2em dashed #5480C9;
+    outline-offset: -0.5em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin:auto;
+    padding:0.5em;
+    -webkit-box-shadow: 4px 4px 4px #18243D;
+    -moz-box-shadow: 4px 4px 4px #18243D;
+    box-shadow: 4px 4px 4px #18243D;
+}
+    
+.footer {
+    font-family: 'Alegreya SC', serif;
+    position: fixed;
+    left: 0;
+    bottom: 0.5em;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+    
+a {
+    color: #B0244D;
+}
