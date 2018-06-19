@@ -18,10 +18,9 @@ function roll() {
 }
 
 function play() {
-    var speed = 50;
-    var id;
-    for (var i = 0; i < 5000; i++)
-        setTimeout("roll()", speed);
+    for (var i = 0; i < 3000; i++) {
+        setTimeout("roll()", 0);
+    }
 }
 
 function resizeWindow() {
