@@ -18,9 +18,12 @@ function roll() {
 }
 
 function play() {
-    for (var i = 0; i < 3000; i++) {
-        setTimeout("roll()", 0);
-    }
+    var times = 0;
+    var interval = setInterval(function(){
+        times ++;
+        if(times === 50) clearInterval(interval);
+        roll();
+    }, 10);
 }
 
 function resizeWindow() {
